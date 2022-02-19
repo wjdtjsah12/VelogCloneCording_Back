@@ -7,7 +7,6 @@ import com.sparta.hanghare99_clonecording.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -25,26 +24,15 @@ public class BoardController {
         return boardService.postingBoard(requestDto);
     }
 
-<<<<<<< HEAD
-    @GetMapping("/board/detail/{postingId}")
-    public Board readBoard(@PathVariable Long postingId) {
-        return boardService.readBoard(postingId);
-    }
+//    @GetMapping("/board/detail/{postingId}")
+//    public Board readBoard(@PathVariable Long id) {
+//        return boardService.readBoard(id);
+//    }
 
-    @PutMapping("/board/update/{postingId}")
-    public Board updateBoard(@PathVariable Long postingId, @RequestBody  BoardRegisterDto boardRegisterDto) {
-        return boardService.updateBoard(boardRegisterDto, postingId);
-    }
-
-    @GetMapping("/board/detail/{postingId}")
-        return boardService.readBoard(id);
-    }
-
-    @PutMapping("/board/update/{postingId}")
-    public Board updateBoard(@PathVariable Long id, @ResponseBody BoardRegisterResponseDto boardRegisterResponseDto) {
-        return boardService.updateBoard(boardRegisterResponseDto, id);
-    }
+//    @PutMapping("/board/update/{postingId}")
+//    public Board updateBoard(@PathVariable Long id, @ResponseBody BoardRegisterResponseDto boardRegisterResponseDto) {
+//        return boardService.updateBoard(boardRegisterResponseDto, id);
+//    }
 
 
-    @Transactional
 }
