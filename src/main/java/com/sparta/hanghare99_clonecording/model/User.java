@@ -1,6 +1,6 @@
 package com.sparta.hanghare99_clonecording.model;
 
-import com.sparta.hanghare99_clonecording.dto.SignupRequestDto;
+import com.sparta.hanghare99_clonecording.dto.SignupDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,26 +14,32 @@ public class User {
     @Id
     private Long id;
 
-    @Column(nullable = false)
+    //이메일 -> 중복 안됨
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    //아이디 -> 중복 안됨
+    @Column(nullable = false, unique = true)
     private String userId;
 
+    //성명
     @Column(nullable = false)
     private String username;
 
+    //비밀번호
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    //소개
+    @Column(nullable = true)
     private String introduce;
 
-    @Column(nullable = false)
+    //프로필넘버
+    @Column(nullable = true)
     private Long profileNum;
     // 랜덤 난수 생성 구현해야합니다.
 
-    public User(SignupRequestDto requestDto){
+    public User(SignupDto requestDto){
         this.email = requestDto.getEmail();
         this.userId = requestDto.getUserId();
         this.username = requestDto.getUsername();

@@ -1,7 +1,6 @@
 package com.sparta.hanghare99_clonecording.model;
 
 import com.sparta.hanghare99_clonecording.domain.Timestamped;
-import com.sparta.hanghare99_clonecording.dto.CommentRegisterDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

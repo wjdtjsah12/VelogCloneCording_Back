@@ -7,7 +7,6 @@ import com.sparta.hanghare99_clonecording.model.User;
 import com.sparta.hanghare99_clonecording.repository.BoardRepository;
 import com.sparta.hanghare99_clonecording.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +23,38 @@ public class BoardService {
         return boardList;
     }
 
+    //게시글 작성
     public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto) {
-//        User user = userDetails.getUser();
+        /*User user = userRepository.findById(Id).orElseThrow(
+                () -> new NullPointerException("존재하지 않는 회원입니다.")
+        );*/
+        //        User user = userDetails.getUser();
         User user = userRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("postingBoard 내부 findByUserId 오류"));
         Board board = new Board(requestDto, user);
         boardRepository.save(board);
         return new BoardRegisterResponseDto(board.getId());
     }
+
+//    //게시글 상세조회
+//    public Board readBoard(Long board_id) {
+//        return boardRepository.findAllById(board_id).orElseThorw(
+//                () -> new NullPointerException("존재하지 않는 글입니다.")
+//        );
+//    }
+//
+//    //게시글 수정
+//    public Board updateBoard(Long board_id, BoardRegisterResponseDto responseDto) {
+//        boardService.update(board_id, responseDto);
+//        );
+//    }
+
+    //게시글 삭제
+    public void deleteBoard(Long board_id) {
+        boardRepository.deleteById(board_id);
+    }
+
+
+
+
+
 }
