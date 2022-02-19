@@ -2,12 +2,13 @@ package com.sparta.hanghare99_clonecording.controller;
 
 import com.sparta.hanghare99_clonecording.dto.BoardRegisterDto;
 import com.sparta.hanghare99_clonecording.dto.BoardRegisterResponseDto;
+import com.sparta.hanghare99_clonecording.dto.BoardUpdateReponseDto;
 import com.sparta.hanghare99_clonecording.model.Board;
 import com.sparta.hanghare99_clonecording.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,20 +28,19 @@ public class BoardController {
 
     @GetMapping("/board/detail/{postingId}")
     public Board readBoard(@PathVariable Long postingId) {
+
         return boardService.readBoard(postingId);
     }
 
-    @PutMapping("/board/update/{postingId}")
-    public Board updateBoard(@PathVariable Long postingId, @RequestBody  BoardRegisterDto boardRegisterDto) {
-        return boardService.updateBoard(boardRegisterDto, postingId);
-    }
-
-    @GetMapping("/board/detail/{postingId}")
-        return boardService.readBoard(id);
-    }
 
     @PutMapping("/board/update/{postingId}")
-    public Board updateBoard(@PathVariable Long id, @ResponseBody BoardRegisterResponseDto boardRegisterResponseDto) {
-        return boardService.updateBoard(boardRegisterResponseDto, id);
+    public BoardUpdateReponseDto updateBoard(@PathVariable Long postingId, @RequestBody  BoardRegisterDto boardRegisterDto) {
+        return boardService.updateBoard(postingId, boardRegisterDto);
     }
+
+    @DeleteMapping("/board/delete/{postingId}")
+    public void deleteBoard(@PathVariable Long postingId) {
+        boardService.deleteBoard(postingId);
+    }
+
 }

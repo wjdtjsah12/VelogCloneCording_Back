@@ -10,12 +10,6 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class BoardRegisterResponseDto {
 
-    private Long board_id;
-
-
-    public BoardRegisterResponseDto(Long board_id) {
-        this.board_id = board_id;
-
     private Long boardId;
 
     public BoardRegisterResponseDto(Long boardId){

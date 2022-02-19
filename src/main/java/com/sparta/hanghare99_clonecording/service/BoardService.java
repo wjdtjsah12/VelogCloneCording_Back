@@ -2,6 +2,7 @@ package com.sparta.hanghare99_clonecording.service;
 
 import com.sparta.hanghare99_clonecording.dto.BoardRegisterDto;
 import com.sparta.hanghare99_clonecording.dto.BoardRegisterResponseDto;
+import com.sparta.hanghare99_clonecording.dto.BoardUpdateReponseDto;
 import com.sparta.hanghare99_clonecording.model.Board;
 import com.sparta.hanghare99_clonecording.model.User;
 import com.sparta.hanghare99_clonecording.repository.BoardRepository;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -25,55 +27,41 @@ public class BoardService {
 
     //게시글 작성
     public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto) {
-
-        User user = userRepository.findById(Id).orElseThrow(
-                () -> new NullPointerException("존재하지 않는 회원입니다.")
-        );
-
-        Board board = new Board(user, requestDto);
-
-        /*User user = userRepository.findById(Id).orElseThrow(
-                () -> new NullPointerException("존재하지 않는 회원입니다.")
-        );*/
-        //        User user = userDetails.getUser();
+//        User user = userRepository.findById(Id).orElseThrow(
+//                () -> new NullPointerException("존재하지 않는 회원입니다.")
+//        );
+//                User user = userDetails.getUser();
         User user = userRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("postingBoard 내부 findByUserId 오류"));
         Board board = new Board(requestDto, user);
-
         boardRepository.save(board);
         return new BoardRegisterResponseDto(board.getId());
     }
 
     //게시글 상세조회
-    public Board readBoard(Long id) {
-        return boardRepository.findAllById(id).orElseThorw(
+    public Board readBoard(Long boardId) {
+        return boardRepository.findById(boardId).orElseThrow(
                 () -> new NullPointerException("존재하지 않는 글입니다.")
         );
     }
 
     //게시글 수정
-    public Board updateBoard( BoardRegisterDto boardRegisterDto, Long board_id) {
-        Board board = boardRepository.findById(id).orElseThrow(
-
+    @Transactional
+    public BoardUpdateReponseDto updateBoard(Long boardId, BoardRegisterDto requestDto) {
+       Board board = boardRepository.findById(boardId).orElseThrow(
+                () -> new NullPointerException("존재하지 않는 글입니다")
         );
-    }
+        board.update(requestDto);
+        String username = board.getUser().getUsername();
+        String title = board.getTitle();
+        String content = board.getContent();
+        BoardUpdateReponseDto boardUpdateReponseDto = new BoardUpdateReponseDto(username, title, content);
 
-    //게시글 상세조회
-    public Board readBoard(Long board_id) {
-        return boardRepository.findAllById(board_id).orElseThorw(
-                () -> new NullPointerException("존재하지 않는 글입니다.")
-        );
+        return boardUpdateReponseDto;
     }
-
-    //게시글 수정
-    public Board updateBoard(Long board_id, BoardRegisterResponseDto responseDto) {
-        boardService.update(board_id, responseDto);
-        );
-    }
-
 
     //게시글 삭제
-    public void deleteBoard(Long board_id) {
-        boardRepository.deleteById(board_id);
+    public void deleteBoard(Long boardId) {
+        boardRepository.deleteById(boardId);
     }
 
 
