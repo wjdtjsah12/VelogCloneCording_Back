@@ -7,8 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class CommentResponseDto {
-    private String username;
-    private String content;
-    private String createdAt;
+public class CommentRegisterResponseDto {
+    private Long comment_Id;
 }
