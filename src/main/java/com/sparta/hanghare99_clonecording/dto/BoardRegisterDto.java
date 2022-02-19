@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class BoardRegisterDto {
-    private Long id;
     private String title;
     private String content;
     private String thumbnailImageUrl;

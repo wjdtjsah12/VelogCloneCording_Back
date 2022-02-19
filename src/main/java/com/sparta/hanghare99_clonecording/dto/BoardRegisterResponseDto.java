@@ -9,17 +9,10 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class BoardRegisterResponseDto {
-    private Long id;
-    private String title;
-    private String content;
-    private String thumbnailImageUrl;
-    private String contentSummary;
+    private Long board_id;
 
-    public BoardRegisterResponseDto(Board board) {
-        this.id = board.getId();
-        this.title = board.getTitle();
-        this.content = board.getContent();
-        this.thumbnailImageUrl = board.getThumbnailImageUrl();
-        this.contentSummary = board.getContentSummary();
+
+    public BoardRegisterResponseDto(Long board_id) {
+        this.board_id = board_id;
     }
 }
