@@ -1,6 +1,7 @@
 package com.sparta.hanghare99_clonecording.model;
 
 import com.sparta.hanghare99_clonecording.domain.Timestamped;
+import com.sparta.hanghare99_clonecording.dto.CommentRegisterDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,5 +30,9 @@ public class Comment extends Timestamped {
         this.content = content;
         this.board = board;
         this.user = user;
+    }
+
+    public void update(CommentRegisterDto requestDto) {
+        this.content = requestDto.getContent();
     }
 }
