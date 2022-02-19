@@ -1,12 +1,5 @@
-//package com.sparta.hanghare99_clonecording.security;
-//
-//import com.sparta.hanghare99_clonecording.model.User;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
-//
-//import java.util.Collection;
-//import java.util.Collections;
-//
+package com.sparta.hanghare99_clonecording.security;
+
 //public class UserDetailsImpl implements UserDetails {
 //
 //    private final User user;

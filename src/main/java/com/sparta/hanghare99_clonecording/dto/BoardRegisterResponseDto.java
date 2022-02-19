@@ -9,10 +9,17 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class BoardRegisterResponseDto {
+<<<<<<< HEAD
     private Long board_id;
 
 
     public BoardRegisterResponseDto(Long board_id) {
         this.board_id = board_id;
+=======
+    private Long boardId;
+
+    public BoardRegisterResponseDto(Long boardId){
+        this.boardId = boardId;
+>>>>>>> ca598ee6502bc698c525c9faaaaf7cca4159b0b9
     }
 }

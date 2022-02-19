@@ -21,10 +21,11 @@ public class BoardController {
     }
 
     @PostMapping("/board/posting")
-    public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto){
+    public BoardRegisterResponseDto postingBoard(@RequestBody BoardRegisterDto requestDto){
         return boardService.postingBoard(requestDto);
     }
 
+<<<<<<< HEAD
     @GetMapping("/board/detail/{postingId}")
     public Board readBoard(@PathVariable Long postingId) {
         return boardService.readBoard(postingId);
@@ -34,6 +35,16 @@ public class BoardController {
     public Board updateBoard(@PathVariable Long postingId, @RequestBody  BoardRegisterDto boardRegisterDto) {
         return boardService.updateBoard(boardRegisterDto, postingId);
     }
+
+    @GetMapping("/board/detail/{postingId}")
+        return boardService.readBoard(id);
+    }
+
+    @PutMapping("/board/update/{postingId}")
+    public Board updateBoard(@PathVariable Long id, @ResponseBody BoardRegisterResponseDto boardRegisterResponseDto) {
+        return boardService.updateBoard(boardRegisterResponseDto, id);
+    }
+
 
     @Transactional
 }
