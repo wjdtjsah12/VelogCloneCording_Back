@@ -19,6 +19,25 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity // 스프링 Security 지원을 가능하게 함
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http.authorizeRequests()
+                // 어떤 요청이든 '인증'
+                //.anyRequest().authenticated()
+                //조건 추가
+                .and()
+                // 로그인 기능 허용
+                .formLogin()//로그인이 성공하면
+                .loginPage("/user/loginView")
+                .defaultSuccessUrl("/")//어디로 이동을 시킬까요? ("/") <- 루트
+                .failureUrl("/user/login?error")
+                .permitAll()
+                .and()
+                // 로그아웃 기능 허용
+                .logout()
+                .permitAll();
+    }
 
 //    private final JWTAuthProvider jwtAuthProvider;
 //    private final HeaderTokenExtractor headerTokenExtractor;
