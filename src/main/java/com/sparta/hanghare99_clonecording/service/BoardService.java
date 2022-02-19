@@ -25,7 +25,6 @@ public class BoardService {
 
     //게시글 작성
     public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto) {
-<<<<<<< HEAD
 
         User user = userRepository.findById(Id).orElseThrow(
                 () -> new NullPointerException("존재하지 않는 회원입니다.")
@@ -33,19 +32,17 @@ public class BoardService {
 
         Board board = new Board(user, requestDto);
 
-=======
         /*User user = userRepository.findById(Id).orElseThrow(
                 () -> new NullPointerException("존재하지 않는 회원입니다.")
         );*/
         //        User user = userDetails.getUser();
         User user = userRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("postingBoard 내부 findByUserId 오류"));
         Board board = new Board(requestDto, user);
->>>>>>> ca598ee6502bc698c525c9faaaaf7cca4159b0b9
+
         boardRepository.save(board);
         return new BoardRegisterResponseDto(board.getId());
     }
 
-<<<<<<< HEAD
     //게시글 상세조회
     public Board readBoard(Long id) {
         return boardRepository.findAllById(id).orElseThorw(
@@ -59,20 +56,20 @@ public class BoardService {
 
         );
     }
-=======
-//    //게시글 상세조회
-//    public Board readBoard(Long board_id) {
-//        return boardRepository.findAllById(board_id).orElseThorw(
-//                () -> new NullPointerException("존재하지 않는 글입니다.")
-//        );
-//    }
-//
-//    //게시글 수정
-//    public Board updateBoard(Long board_id, BoardRegisterResponseDto responseDto) {
-//        boardService.update(board_id, responseDto);
-//        );
-//    }
->>>>>>> ca598ee6502bc698c525c9faaaaf7cca4159b0b9
+
+    //게시글 상세조회
+    public Board readBoard(Long board_id) {
+        return boardRepository.findAllById(board_id).orElseThorw(
+                () -> new NullPointerException("존재하지 않는 글입니다.")
+        );
+    }
+
+    //게시글 수정
+    public Board updateBoard(Long board_id, BoardRegisterResponseDto responseDto) {
+        boardService.update(board_id, responseDto);
+        );
+    }
+
 
     //게시글 삭제
     public void deleteBoard(Long board_id) {

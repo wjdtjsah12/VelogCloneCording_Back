@@ -25,7 +25,6 @@ public class BoardController {
         return boardService.postingBoard(requestDto);
     }
 
-<<<<<<< HEAD
     @GetMapping("/board/detail/{postingId}")
     public Board readBoard(@PathVariable Long postingId) {
         return boardService.readBoard(postingId);
@@ -44,7 +43,4 @@ public class BoardController {
     public Board updateBoard(@PathVariable Long id, @ResponseBody BoardRegisterResponseDto boardRegisterResponseDto) {
         return boardService.updateBoard(boardRegisterResponseDto, id);
     }
-
-
-    @Transactional
 }
