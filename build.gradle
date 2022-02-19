@@ -27,17 +27,17 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation group: 'org.json', name: 'json', version: '20160810'
 
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
-    implementation 'commons-codec:commons-codec:1.5'
+//    implementation 'commons-codec:commons-codec:1.5'
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
-    implementation 'com.auth0:java-jwt:3.13.0'
+//    implementation 'com.auth0:java-jwt:3.13.0'
 }
 
 tasks.named('test') {

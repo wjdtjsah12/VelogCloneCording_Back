@@ -7,6 +7,7 @@ import com.sparta.hanghare99_clonecording.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class BoardController {
     }
 
     @PostMapping("/board/posting")
-    public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto){
+    public BoardRegisterResponseDto postingBoard(@RequestBody BoardRegisterDto requestDto){
         return boardService.postingBoard(requestDto);
     }
 }
