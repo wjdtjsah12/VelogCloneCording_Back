@@ -5,9 +5,7 @@ import com.sparta.hanghare99_clonecording.dto.BoardRegisterResponseDto;
 import com.sparta.hanghare99_clonecording.model.Board;
 import com.sparta.hanghare99_clonecording.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +23,16 @@ public class BoardController {
     public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto){
         return boardService.postingBoard(requestDto);
     }
+
+    @GetMapping("/board/detail/{postingId}")
+    public Board readBoard(@PathVariable Long id) {
+        return boardService.readBoard(id);
+    }
+
+    @PutMapping("/board/update/{postingId}")
+    public Board updateBoard(@PathVariable Long id, @ResponseBody BoardRegisterResponseDto boardRegisterResponseDto) {
+        return boardService.updateBoard(boardRegisterResponseDto, id);
+    }
+
+
 }

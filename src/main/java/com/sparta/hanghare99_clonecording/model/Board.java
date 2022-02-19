@@ -15,9 +15,9 @@ public class Board extends Timestamped {
     @Id
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
 
     @Column(nullable = false)
     private String title;
@@ -31,11 +31,11 @@ public class Board extends Timestamped {
     @Column(nullable = false)
     private String thumbnailImageUrl;
 
-    public Board(BoardRegisterDto requestDto, User user){
+    public Board(BoardRegisterDto requestDto /*User user*/){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.contentSummary = requestDto.getContentSummary();
         this.thumbnailImageUrl = requestDto.getThumbnailImageUrl();
-        this.user = user;
+        //this.user = user;
     }
 }
