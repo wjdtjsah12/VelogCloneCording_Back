@@ -1,6 +1,7 @@
 package com.sparta.hanghare99_clonecording.service;
 
 import com.sparta.hanghare99_clonecording.dto.CommentRegisterDto;
+import com.sparta.hanghare99_clonecording.dto.CommentRegisterResponseDto;
 import com.sparta.hanghare99_clonecording.dto.CommentResponseDto;
 import com.sparta.hanghare99_clonecording.model.Board;
 import com.sparta.hanghare99_clonecording.model.Comment;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +25,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
 
-    public CommentResponseDto registerComment(Long boardId, CommentRegisterDto requestDto) {
+    public CommentRegisterResponseDto registerComment(Long boardId, CommentRegisterDto requestDto) {
         // boardId, Dto 유효성검사
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("registerComment 내부 findByBoardId 오류"));
         CommentValidation.validationCommentRegister(requestDto);
@@ -34,7 +36,7 @@ public class CommentService {
         Comment comment = new Comment(requestDto.getContent(), board, user);
         commentRepository.save(comment);
 
-        CommentResponseDto commentResponseDto = new CommentResponseDto();
+        CommentRegisterResponseDto commentResponseDto = new CommentRegisterResponseDto();
         commentResponseDto.setComment_Id(comment.getId());
         return commentResponseDto;
     }
@@ -57,8 +59,20 @@ public class CommentService {
         commentRepository.delete(comment);
     }
 
-    public List<Comment> getComments(Long boardId) {
+    public List<CommentResponseDto> getComments(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("getComments 내부 findByBoardId 오류"));
-        return commentRepository.findAllByBoard(board);
+        List <Comment> commentList = commentRepository.findAllByBoard(board);
+
+        // user정보 노출 방지위해서 CommentResponseDto로 response
+        List <CommentResponseDto> commentResponseDtoList = new ArrayList<>();
+        for(Comment comment : commentList){
+            CommentResponseDto commentResponseDto = new CommentResponseDto();
+            commentResponseDto.setContent(comment.getContent());
+            commentResponseDto.setUsername(comment.getUser().getUsername());
+            commentResponseDto.setCreatedAt(comment.getCreatedAt());
+            commentResponseDtoList.add(commentResponseDto);
+        }
+
+        return commentResponseDtoList;
     }
 }

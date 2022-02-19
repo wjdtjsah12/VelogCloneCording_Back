@@ -1,6 +1,7 @@
 package com.sparta.hanghare99_clonecording.controller;
 
 import com.sparta.hanghare99_clonecording.dto.CommentRegisterDto;
+import com.sparta.hanghare99_clonecording.dto.CommentRegisterResponseDto;
 import com.sparta.hanghare99_clonecording.dto.CommentResponseDto;
 import com.sparta.hanghare99_clonecording.model.Comment;
 import com.sparta.hanghare99_clonecording.service.CommentService;
@@ -16,7 +17,7 @@ public class CommentController {
 
     // comment 등록 메소드
     @PostMapping("/comment/write/{boardId}")
-    public CommentResponseDto registerComment(@PathVariable Long boardId, @RequestBody CommentRegisterDto requestDto){
+    public CommentRegisterResponseDto registerComment(@PathVariable Long boardId, @RequestBody CommentRegisterDto requestDto){
         return commentService.registerComment(boardId, requestDto);
     }
 
@@ -34,7 +35,7 @@ public class CommentController {
 
     // 해당 Board의 comment 전체 불러오기 메소드
     @GetMapping("/comments/{boardId}")
-    public List<Comment> getComments(@PathVariable Long boardId) {
+    public List<CommentResponseDto> getComments(@PathVariable Long boardId) {
         return commentService.getComments(boardId);
     }
 }
