@@ -24,6 +24,8 @@ public class BoardController {
         return boardService.postingBoard(requestDto);
     }
 
+    
+
 //    @GetMapping("/board/detail/{postingId}")
 //    public Board readBoard(@PathVariable Long id) {
 //        return boardService.readBoard(id);
