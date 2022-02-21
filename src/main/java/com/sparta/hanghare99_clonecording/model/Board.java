@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class Board extends Timestamped {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Column(name = "board_id")
     private Long id;
 
     @ManyToOne

@@ -41,7 +41,7 @@ public class LikesService {
 
         Likes likes = new Likes(board.get(), user.get());
         likesRepository.save(likes);
-
+//        System.out.println(board.get().getLikesList().size());
         return new LikesRegisterResponseDto(likes.getId());
     }
 

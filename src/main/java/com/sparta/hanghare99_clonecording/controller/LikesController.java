@@ -2,12 +2,9 @@ package com.sparta.hanghare99_clonecording.controller;
 
 import com.sparta.hanghare99_clonecording.dto.LikesRegisterResponseDto;
 import com.sparta.hanghare99_clonecording.dto.LikesResponseDto;
-import com.sparta.hanghare99_clonecording.model.Likes;
 import com.sparta.hanghare99_clonecording.service.LikesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
