@@ -31,8 +31,16 @@ public class BoardService {
 //                () -> new NullPointerException("존재하지 않는 회원입니다.")
 //        );
 //                User user = userDetails.getUser();
-        User user = userRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("postingBoard 내부 findByUserId 오류"));
+        User user = userRepository.findById(1L).orElseThrow(
+                () -> new IllegalArgumentException("postingBoard 내부 findByUserId 오류")
+        );
         Board board = new Board(requestDto, user);
+        //유효성검사
+        String title = board.getTitle();
+
+        if (title.trim().isEmpty()) {
+            throw new IllegalArgumentException("제목을 입력해주세요.");
+        }
         boardRepository.save(board);
         return new BoardRegisterResponseDto(board.getId());
     }
@@ -55,13 +63,14 @@ public class BoardService {
         String title = board.getTitle();
         String content = board.getContent();
         BoardUpdateReponseDto boardUpdateReponseDto = new BoardUpdateReponseDto(username, title, content);
-
+        if (title.trim().isEmpty()) {
+            throw new IllegalArgumentException("제목을 입력해주세요.");
+        }
         return boardUpdateReponseDto;
     }
 
     //게시글 삭제
-    public void deleteBoard(Long boardId) {
-        boardRepository.deleteById(boardId);
+    public void deleteBoard(Long board_id) {
+        boardRepository.deleteById(board_id);
     }
-
 }
