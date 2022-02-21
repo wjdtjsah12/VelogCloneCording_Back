@@ -4,7 +4,9 @@ import com.sparta.hanghare99_clonecording.dto.SignupDto;
 import com.sparta.hanghare99_clonecording.model.User;
 import com.sparta.hanghare99_clonecording.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.Random;
 
 import java.util.Optional;
 
@@ -13,22 +15,25 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     //회원가입 시 이메일 중복 및 아이디 검사, 비밀번호 암호화
     public void registerUser(SignupDto signupDto){
         //패스워드 암호화
-//        signupDto.setPassword(passwordEncoder.encode(signupDto.getPassword()));
-        checkEmail(signupDto.getEmail());
+        signupDto.setPassword(passwordEncoder.encode(signupDto.getPassword()));
+        checkEmail(signupDto.getUsername());
         checkUserId(signupDto.getUserId());
-
         User user = new User(signupDto);
         userRepository.save(user);
     }
+
+
+
+
     //이메일 중복 확인 함수
-    public void checkEmail(String email){
-        Optional<User> foundEmail = userRepository.findByEmail(email);
-        if (foundEmail.isPresent()){
+    public void checkEmail(String username){
+        Optional<User> foundUsername = userRepository.findByUsername(username);
+        if (foundUsername.isPresent()){
             throw new IllegalArgumentException("중복된 이메일 입니다.");
         }
     }

@@ -37,18 +37,10 @@ public class BoardService {
         Board board = new Board(requestDto, user);
         //유효성검사
         String title = board.getTitle();
-        String content = board.getContent();
-        String contentSummary = board.getContentSummary();
-        String thumbnailImageUrl = board.getThumbnailImageUrl();
+
 
         if (title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목을 입력해주세요.");
-        } else if (content.trim().isEmpty()) {
-            throw new IllegalArgumentException("내용을 입력해주세요.");
-        } else if (contentSummary.trim().isEmpty()) {
-            throw new IllegalArgumentException("요약될 내용을 입력해주세요");
-        } else if (thumbnailImageUrl.trim().isEmpty()) {
-            throw new IllegalArgumentException("이미지를 올려주세요");
         }
         boardRepository.save(board);
         return new BoardRegisterResponseDto(board.getId());
@@ -76,12 +68,6 @@ public class BoardService {
         BoardUpdateReponseDto boardUpdateReponseDto = new BoardUpdateReponseDto(username, title, content);
         if (title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목을 입력해주세요.");
-        } else if (content.trim().isEmpty()) {
-            throw new IllegalArgumentException("내용을 입력해주세요.");
-        } else if (contentSummary.trim().isEmpty()) {
-            throw new IllegalArgumentException("요약될 내용을 입력해주세요");
-        } else if (thumbnailImageUrl.trim().isEmpty()) {
-            throw new IllegalArgumentException("이미지를 올려주세요");
         }
         return boardUpdateReponseDto;
     }

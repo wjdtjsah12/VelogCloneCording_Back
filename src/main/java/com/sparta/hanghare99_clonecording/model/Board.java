@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class Board extends Timestamped {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Column(name = "board_id")
     private Long id;
 
     @ManyToOne
@@ -22,13 +23,13 @@ public class Board extends Timestamped {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String content;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String contentSummary;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String thumbnailImageUrl;
 
     public Board(BoardRegisterDto requestDto, User user){
