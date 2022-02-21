@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Random;
 
 @Getter
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class User {
 
     //이메일 -> 중복 안됨 -> 유저 네임으로 바꿔야함
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
 
     //아이디 -> 중복 안됨
     @Column(nullable = false, unique = true)
@@ -24,7 +25,7 @@ public class User {
 
     //성명 -> 닉네임 change
     @Column(nullable = false)
-    private String username;
+    private String nickname;
 
     //비밀번호
     @Column(nullable = false)
@@ -36,15 +37,16 @@ public class User {
 
     //프로필넘버
     @Column(nullable = true)
-    private Long profileNum;
+    private int profileNum;
     // 랜덤 난수 생성 구현해야합니다.
 
     public User(SignupDto requestDto){
-        this.email = requestDto.getEmail();
-        this.userId = requestDto.getUserId();
         this.username = requestDto.getUsername();
+        this.userId = requestDto.getUserId();
+        this.nickname = requestDto.getNickname();
         this.password = requestDto.getPassword();
         this.introduce = requestDto.getIntroduce();
-        this.profileNum = requestDto.getProfileNum();
+        this.profileNum = new Random().nextInt(4)+1;
     }
+
 }

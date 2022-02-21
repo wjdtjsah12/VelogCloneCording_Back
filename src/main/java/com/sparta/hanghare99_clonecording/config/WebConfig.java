@@ -16,10 +16,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*") // 서버로 요청 시 사용할 수 있는 헤더 명시
                 .exposedHeaders(HttpHeaders.AUTHORIZATION); // 브라우저에 표시할 헤더명 표시
         //.allowCredentials(true); //클라이언트 쿠키 받는거 허용
-
-
-
     }
-
-
 }

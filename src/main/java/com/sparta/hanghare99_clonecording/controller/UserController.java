@@ -29,10 +29,9 @@ public class UserController {
     public ErrorMessageDto registerUser(@RequestBody SignupDto signupDto){
         System.out.println(signupDto.getUsername());
         System.out.println(signupDto.getUserId());
-        System.out.println(signupDto.getEmail());
+        System.out.println(signupDto.getNickname());
         System.out.println(signupDto.getPassword());
         System.out.println(signupDto.getIntroduce());
-        System.out.println(signupDto.getProfileNum());
 
         try {
             userService.registerUser(signupDto); // 중간에 에러가 발생하면 서비스에서 처리한 에러메세지를 받음.
@@ -54,8 +53,18 @@ public class UserController {
     public IsLoginDto userLoginCheck(@AuthenticationPrincipal UserDetailsImpl userDetails){
         System.out.println(userDetails);
             User username = userDetails.getUser();
-            return new IsLoginDto(username.getUsername());
+            return new IsLoginDto(
+                    username.getUsername(),
+                    username.getUserId(),
+                    username.getNickname(),
+                    username.getIntroduce(),
+                    username.getProfileNum()
+            );
     }
+
+    //로그인
+//    @PostMapping("/user/login")
+//    public
 
 //    //로그아웃
 //    @PostMapping("/user/logout")
