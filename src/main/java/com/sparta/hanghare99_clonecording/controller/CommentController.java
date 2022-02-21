@@ -20,6 +20,5 @@ public class CommentController {
     // comment 수정 메소드
     @PutMapping("/comment/update/{boardId}/{commentId}")
     public void updateComment(@PathVariable Long commentId){
-
     }
 }
