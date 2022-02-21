@@ -22,13 +22,13 @@ public class Board extends Timestamped {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = true)
+    @Column
     private String content;
 
-    @Column(nullable = true)
+    @Column
     private String contentSummary;
 
-    @Column(nullable = true)
+    @Column
     private String thumbnailImageUrl;
 
     public Board(BoardRegisterDto requestDto, User user){
