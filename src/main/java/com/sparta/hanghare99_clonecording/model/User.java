@@ -14,7 +14,7 @@ public class User {
     @Id
     private Long id;
 
-    //이메일 -> 중복 안됨
+    //이메일 -> 중복 안됨 -> 유저 네임으로 바꿔야함
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -22,7 +22,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String userId;
 
-    //성명
+    //성명 -> 닉네임 change
     @Column(nullable = false)
     private String username;
 
