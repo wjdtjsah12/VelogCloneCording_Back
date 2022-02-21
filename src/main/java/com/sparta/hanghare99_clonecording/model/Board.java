@@ -38,4 +38,11 @@ public class Board extends Timestamped {
         this.thumbnailImageUrl = requestDto.getThumbnailImageUrl();
         this.user = user;
     }
+
+    public void update(BoardRegisterDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.contentSummary = requestDto.getContentSummary();
+        this.thumbnailImageUrl = requestDto.getThumbnailImageUrl();
+    }
 }
