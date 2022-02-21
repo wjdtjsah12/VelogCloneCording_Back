@@ -1,12 +1,12 @@
 package com.sparta.hanghare99_clonecording.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class BoardRegisterDto {
     private Long id;
     private String title;

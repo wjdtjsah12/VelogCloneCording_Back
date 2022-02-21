@@ -1,5 +1,6 @@
 package com.sparta.hanghare99_clonecording.service;
 
+
 import com.sparta.hanghare99_clonecording.dto.BoardRegisterDto;
 import com.sparta.hanghare99_clonecording.dto.BoardRegisterResponseDto;
 import com.sparta.hanghare99_clonecording.dto.BoardUpdateReponseDto;
@@ -38,7 +39,6 @@ public class BoardService {
         //유효성검사
         String title = board.getTitle();
 
-
         if (title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목을 입력해주세요.");
         }
@@ -63,8 +63,6 @@ public class BoardService {
         String username = board.getUser().getUsername();
         String title = board.getTitle();
         String content = board.getContent();
-        String contentSummary = board.getContentSummary();
-        String thumbnailImageUrl = board.getThumbnailImageUrl();
         BoardUpdateReponseDto boardUpdateReponseDto = new BoardUpdateReponseDto(username, title, content);
         if (title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목을 입력해주세요.");
