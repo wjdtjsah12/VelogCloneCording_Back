@@ -43,4 +43,5 @@ public class BoardController {
         boardService.deleteBoard(postingId);
     }
 
+
 }
