@@ -4,6 +4,7 @@ import com.sparta.hanghare99_clonecording.dto.SignupDto;
 import com.sparta.hanghare99_clonecording.model.User;
 import com.sparta.hanghare99_clonecording.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,12 +14,12 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     //회원가입 시 이메일 중복 및 아이디 검사, 비밀번호 암호화
     public void registerUser(SignupDto signupDto){
         //패스워드 암호화
-//        signupDto.setPassword(passwordEncoder.encode(signupDto.getPassword()));
+        signupDto.setPassword(passwordEncoder.encode(signupDto.getPassword()));
         checkEmail(signupDto.getEmail());
         checkUserId(signupDto.getUserId());
 

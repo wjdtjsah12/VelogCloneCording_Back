@@ -1,9 +1,13 @@
 package com.sparta.hanghare99_clonecording.controller;
 
 import com.sparta.hanghare99_clonecording.dto.ErrorMessageDto;
+import com.sparta.hanghare99_clonecording.dto.IsLoginDto;
 import com.sparta.hanghare99_clonecording.dto.SignupDto;
+import com.sparta.hanghare99_clonecording.model.User;
+import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
 import com.sparta.hanghare99_clonecording.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,7 +49,15 @@ public class UserController {
 
     }
 
-    //로그아웃
+    //로그인 유저 확인
+    @PostMapping("/islogin")
+    public IsLoginDto userLoginCheck(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        System.out.println(userDetails);
+            User username = userDetails.getUser();
+            return new IsLoginDto(username.getUsername());
+    }
+
+//    //로그아웃
 //    @PostMapping("/user/logout")
 //    public urlDto logout(){
 //        return new urlDto("/");
