@@ -27,10 +27,10 @@ public class BoardService {
 
     //게시글 작성
     public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto) {
-        /*User user = userRepository.findById(Id).orElseThrow(
-                () -> new NullPointerException("존재하지 않는 회원입니다.")
-        );
-                User user = userDetails.getUser();*/
+//        User user = userRepository.findById(Id).orElseThrow(
+//                () -> new NullPointerException("존재하지 않는 회원입니다.")
+//        );
+//                User user = userDetails.getUser();
         User user = userRepository.findById(1L).orElseThrow(
                 () -> new IllegalArgumentException("postingBoard 내부 findByUserId 오류")
         );
@@ -90,9 +90,4 @@ public class BoardService {
     public void deleteBoard(Long board_id) {
         boardRepository.deleteById(board_id);
     }
-
-
-
-
-
 }

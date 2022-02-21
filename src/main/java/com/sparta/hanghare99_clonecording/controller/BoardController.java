@@ -8,6 +8,7 @@ import com.sparta.hanghare99_clonecording.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -41,6 +42,4 @@ public class BoardController {
     public void deleteBoard(@PathVariable Long postingId) {
         boardService.deleteBoard(postingId);
     }
-
-
 }
