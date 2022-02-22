@@ -11,6 +11,7 @@ import com.sparta.hanghare99_clonecording.repository.UserRepository;
 import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -58,19 +59,25 @@ public class BoardService {
 
     //게시글 수정
     @Transactional
-    public BoardUpdateReponseDto updateBoard(Long boardId, BoardRegisterDto requestDto) {
+    public BoardUpdateReponseDto updateBoard(Long boardId, BoardRegisterDto requestDto, UserDetailsImpl userDetails) {
        Board board = boardRepository.findById(boardId).orElseThrow(
                 () -> new NullPointerException("존재하지 않는 글입니다")
         );
-        board.update(requestDto);
+        User user = userDetails.getUser();
         String username = board.getUser().getUsername();
         String title = board.getTitle();
         String content = board.getContent();
 
         BoardUpdateReponseDto boardUpdateReponseDto = new BoardUpdateReponseDto(username, title, content);
-        if (title.trim().isEmpty()) {
+
+        if (!board.getUser().equals(user)) {
+            throw new IllegalArgumentException("게시글을 수정할 권한이 없습니다");
+        } else if (title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목을 입력해주세요.");
         }
+
+        board.update(requestDto);
+
         return boardUpdateReponseDto;
     }
 
