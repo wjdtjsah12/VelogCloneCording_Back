@@ -1,10 +1,7 @@
 package com.sparta.hanghare99_clonecording.service;
 
 
-import com.sparta.hanghare99_clonecording.dto.BoardRegisterDto;
-import com.sparta.hanghare99_clonecording.dto.BoardRegisterResponseDto;
-import com.sparta.hanghare99_clonecording.dto.BoardUpdateReponseDto;
-import com.sparta.hanghare99_clonecording.dto.LikesResponseDto;
+import com.sparta.hanghare99_clonecording.dto.*;
 import com.sparta.hanghare99_clonecording.model.Board;
 import com.sparta.hanghare99_clonecording.model.Likes;
 import com.sparta.hanghare99_clonecording.model.User;
@@ -27,7 +24,7 @@ public class BoardService {
     private final UserRepository userRepository;
     private final LikesRepository likesRepository;
 
-    public List<Board> getLikeBoards() {
+    public List<Board> likeBoards() {
         List<Board> boardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         return boardList;
     }

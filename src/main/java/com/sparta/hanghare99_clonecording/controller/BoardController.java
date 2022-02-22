@@ -20,8 +20,8 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/boards/likes")
-    public List<Board> getLikeBoards() {
-        return boardService.getLikeBoards();
+    public List<Board> LikeBoards() {
+        return boardService.likeBoards();
     }
 
     @PostMapping("/board/posting")

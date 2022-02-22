@@ -34,6 +34,12 @@ public class Board extends Timestamped {
     @Column
     private String thumbnailImageUrl;
 
+    @Column
+    private Long likeCount;
+
+    @Column
+    private Long commentCount;
+
     @OneToMany
     @Column(name = "board_id")
     private List<Likes> likesList = new ArrayList<>();
@@ -51,6 +57,15 @@ public class Board extends Timestamped {
         this.content = requestDto.getContent();
         this.contentSummary = requestDto.getContentSummary();
         this.thumbnailImageUrl = requestDto.getThumbnailImageUrl();
+    }
+
+    public void likeBoards (Long id, Long likeCount, Long commentCount, String title, String thumbnailImageUrl, String contentSummary) {
+        this.id = id;
+        this.likeCount = likeCount;
+        this.commentCount = commentCount;
+        this.title = title;
+        this.thumbnailImageUrl = thumbnailImageUrl;
+        this.contentSummary = contentSummary;
     }
 
 }
