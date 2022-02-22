@@ -45,11 +45,8 @@ public class BoardController {
         boardService.deleteBoard(postingId);
     }
 
-<<<<<<< HEAD
-=======
     @PostMapping("/board/like/{boardId}")
     public LikesResponseDto registerOrDeleteLike (@PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return boardService.registerOrDeleteLike(boardId, userDetails);
     }
->>>>>>> 2709342c743f97b50e0d616699ff9d5233670ce7
 }

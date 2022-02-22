@@ -69,10 +69,7 @@ public class BoardService {
         String username = board.getUser().getUsername();
         String title = board.getTitle();
         String content = board.getContent();
-<<<<<<< HEAD
-=======
 
->>>>>>> 2709342c743f97b50e0d616699ff9d5233670ce7
         BoardUpdateReponseDto boardUpdateReponseDto = new BoardUpdateReponseDto(username, title, content);
         if (title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목을 입력해주세요.");
