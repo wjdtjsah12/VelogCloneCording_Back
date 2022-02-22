@@ -1,9 +1,6 @@
 package com.sparta.hanghare99_clonecording.service;
 
-import com.sparta.hanghare99_clonecording.dto.BoardRegisterDto;
-import com.sparta.hanghare99_clonecording.dto.BoardRegisterResponseDto;
-import com.sparta.hanghare99_clonecording.dto.BoardResponseDto;
-import com.sparta.hanghare99_clonecording.dto.BoardUpdateReponseDto;
+import com.sparta.hanghare99_clonecording.dto.*;
 import com.sparta.hanghare99_clonecording.model.Board;
 import com.sparta.hanghare99_clonecording.model.User;
 import com.sparta.hanghare99_clonecording.repository.BoardRepository;
@@ -19,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -54,10 +52,11 @@ public class BoardService {
     }
 
     //게시글 상세조회
-    public Board readBoard(Long boardId) {
-        return boardRepository.findById(boardId).orElseThrow(
+    public BoardDetailResponseDto readBoard(Long boardId) {
+        Board board =  boardRepository.findById(boardId).orElseThrow(
                 () -> new NullPointerException("존재하지 않는 글입니다.")
         );
+        return new BoardDetailResponseDto(board);
     }
 
     //게시글 수정
@@ -68,19 +67,17 @@ public class BoardService {
         );
 
         User user = userDetails.getUser();
-        String username = board.getUser().getUsername();
-        String title = board.getTitle();
-        String content = board.getContent();
+        String userId = board.getUser().getUserId();
+        String title = requestDto.getTitle();
+        String content = requestDto.getContent();
 
-        BoardUpdateReponseDto boardUpdateReponseDto = new BoardUpdateReponseDto(username, title, content);
-
-        if (!board.getUser().equals(user)) {
+        if (!Objects.equals(board.getRegisterdUid(), user.getId())) {
             throw new IllegalArgumentException("게시글을 수정할 권한이 없습니다");
         } else if (title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목을 입력해주세요.");
         }
         board.update(requestDto);
-        return boardUpdateReponseDto;
+        return new BoardUpdateReponseDto(userId, title, content);
     }
 
     //게시글 삭제

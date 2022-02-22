@@ -38,6 +38,7 @@ public class CommentService {
 
         CommentRegisterResponseDto commentResponseDto = new CommentRegisterResponseDto();
         commentResponseDto.setComment_Id(comment.getId());
+        commentResponseDto.setCreatedAt(comment.getCreatedAt());
         return commentResponseDto;
     }
     @Transactional

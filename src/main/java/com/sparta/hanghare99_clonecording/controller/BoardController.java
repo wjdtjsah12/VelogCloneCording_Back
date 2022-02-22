@@ -1,9 +1,6 @@
 package com.sparta.hanghare99_clonecording.controller;
 
-import com.sparta.hanghare99_clonecording.dto.BoardRegisterDto;
-import com.sparta.hanghare99_clonecording.dto.BoardRegisterResponseDto;
-import com.sparta.hanghare99_clonecording.dto.BoardResponseDto;
-import com.sparta.hanghare99_clonecording.dto.BoardUpdateReponseDto;
+import com.sparta.hanghare99_clonecording.dto.*;
 import com.sparta.hanghare99_clonecording.model.Board;
 import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
 import com.sparta.hanghare99_clonecording.service.BoardService;
@@ -29,7 +26,7 @@ public class BoardController {
     }
 
     @GetMapping("/board/detail/{postingId}")
-    public Board readBoard(@PathVariable Long postingId) {
+    public BoardDetailResponseDto readBoard(@PathVariable Long postingId) {
         return boardService.readBoard(postingId);
     }
 
