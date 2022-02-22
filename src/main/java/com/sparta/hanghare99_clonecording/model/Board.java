@@ -15,7 +15,7 @@ import java.util.List;
 public class Board extends Timestamped {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "board_id")
+    @Column
     private Long id;
 
     @ManyToOne
@@ -34,16 +34,20 @@ public class Board extends Timestamped {
     @Column
     private String thumbnailImageUrl;
 
-    @OneToMany
-    @Column(name = "board_id")
-    private List<Likes> likesList = new ArrayList<>();
+    @Column
+    private Long likesCount;
+
+    @Column
+    private Long registerdUid;
 
     public Board(BoardRegisterDto requestDto, User user){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.contentSummary = requestDto.getContentSummary();
         this.thumbnailImageUrl = requestDto.getThumbnailImageUrl();
+        this.registerdUid = user.getId();
         this.user = user;
+        this.likesCount = 0L;
     }
 
     public void update(BoardRegisterDto requestDto) {
@@ -51,6 +55,10 @@ public class Board extends Timestamped {
         this.content = requestDto.getContent();
         this.contentSummary = requestDto.getContentSummary();
         this.thumbnailImageUrl = requestDto.getThumbnailImageUrl();
+    }
+
+    public void updateLikesCount(Long likesCount){
+        this.likesCount = likesCount;
     }
 
 }

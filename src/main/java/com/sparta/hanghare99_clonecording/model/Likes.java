@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Likes {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "likes_id")
+    @Column
     private Long id;
 
     @ManyToOne

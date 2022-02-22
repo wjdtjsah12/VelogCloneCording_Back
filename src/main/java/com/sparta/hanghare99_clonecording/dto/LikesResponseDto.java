@@ -1,5 +1,6 @@
 package com.sparta.hanghare99_clonecording.dto;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -8,9 +9,11 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class LikesResponseDto {
-    private String msg;
+    private Boolean result;
+    private Long likesNum;
 
-    public LikesResponseDto(String msg){
-        this.msg = msg;
+    public LikesResponseDto(Boolean result, Long likesNum){
+        this.result = result;
+        this.likesNum = likesNum;
     }
 }
