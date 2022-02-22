@@ -1,17 +1,17 @@
 package com.sparta.hanghare99_clonecording.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class BoardRegisterDto {
+public class LikeBoardsDto {
     private Long id;
+    private Long likeCount;
+    private Long commentCount;
     private String title;
-    private String content;
     private String thumbnailImageUrl;
     private String contentSummary;
+
 
 }
