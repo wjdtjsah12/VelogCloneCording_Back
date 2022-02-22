@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -32,6 +34,10 @@ public class Board extends Timestamped {
     @Column
     private String thumbnailImageUrl;
 
+    @OneToMany
+    @Column(name = "board_id")
+    private List<Likes> likesList = new ArrayList<>();
+
     public Board(BoardRegisterDto requestDto, User user){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
@@ -46,4 +52,5 @@ public class Board extends Timestamped {
         this.contentSummary = requestDto.getContentSummary();
         this.thumbnailImageUrl = requestDto.getThumbnailImageUrl();
     }
+
 }

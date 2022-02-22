@@ -20,9 +20,4 @@ public class LikesController {
     public void deleteLikes(@PathVariable Long likesId){
         likesService.deleteLikes(likesId);
     }
-
-    @GetMapping("/likes/{boardId}")
-    public LikesResponseDto getBoardsLikes(@PathVariable Long boardId){
-        return likesService.getBoardsLikes(boardId);
-    }
 }

@@ -49,11 +49,4 @@ public class LikesService {
         Likes likes = likesRepository.findById(likesId).orElseThrow(() -> new IllegalArgumentException("deleteLike 내부 findByLikesId 오류"));
         likesRepository.delete(likes);
     }
-
-    public LikesResponseDto getBoardsLikes(Long boardId) {
-        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("getBoardsLikes 내부 findByBoardId 오류"));
-        List <Likes> likesList = likesRepository.findAllByBoard(board);
-        Long listSize = (long) likesList.size();
-        return new LikesResponseDto(listSize);
-    }
 }

@@ -4,22 +4,28 @@ package com.sparta.hanghare99_clonecording.service;
 import com.sparta.hanghare99_clonecording.dto.BoardRegisterDto;
 import com.sparta.hanghare99_clonecording.dto.BoardRegisterResponseDto;
 import com.sparta.hanghare99_clonecording.dto.BoardUpdateReponseDto;
+import com.sparta.hanghare99_clonecording.dto.LikesResponseDto;
 import com.sparta.hanghare99_clonecording.model.Board;
+import com.sparta.hanghare99_clonecording.model.Likes;
 import com.sparta.hanghare99_clonecording.model.User;
 import com.sparta.hanghare99_clonecording.repository.BoardRepository;
+import com.sparta.hanghare99_clonecording.repository.LikesRepository;
 import com.sparta.hanghare99_clonecording.repository.UserRepository;
+import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
+    private final LikesRepository likesRepository;
 
     public List<Board> getLikeBoards() {
         List<Board> boardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
@@ -63,6 +69,10 @@ public class BoardService {
         String username = board.getUser().getUsername();
         String title = board.getTitle();
         String content = board.getContent();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2709342c743f97b50e0d616699ff9d5233670ce7
         BoardUpdateReponseDto boardUpdateReponseDto = new BoardUpdateReponseDto(username, title, content);
         if (title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목을 입력해주세요.");
@@ -73,5 +83,22 @@ public class BoardService {
     //게시글 삭제
     public void deleteBoard(Long board_id) {
         boardRepository.deleteById(board_id);
+    }
+
+    //좋아요 등록 및 삭제
+    public LikesResponseDto registerOrDeleteLike(Long boardId, UserDetailsImpl userDetails) {
+        Board board = boardRepository.findById(boardId).orElseThrow(()->new IllegalArgumentException("존재하지 않는 글입니다."));
+        User user = userDetails.getUser();
+        Optional <Likes> likes =  likesRepository.findByBoardAndUser(board, user);
+        if(!likes.isPresent()){
+            Likes newLikes = new Likes(board, user);
+            likesRepository.save(newLikes);
+            System.out.println("좋등");
+            return new LikesResponseDto("좋아요 등록");
+        }else{
+            likesRepository.delete(likes.get());
+            System.out.println("좋삭");
+            return new LikesResponseDto("좋아요 삭제");
+        }
     }
 }
