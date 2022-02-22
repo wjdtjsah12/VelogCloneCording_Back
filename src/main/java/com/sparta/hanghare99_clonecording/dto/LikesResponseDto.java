@@ -8,9 +8,9 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class LikesResponseDto {
-    private Long boardTotalLikes;
+    private String msg;
 
-    public LikesResponseDto(Long boardTotalLikes){
-        this.boardTotalLikes = boardTotalLikes;
+    public LikesResponseDto(String msg){
+        this.msg = msg;
     }
 }

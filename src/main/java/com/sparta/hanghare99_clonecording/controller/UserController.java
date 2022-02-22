@@ -42,7 +42,7 @@ public class UserController {
             System.out.println("signup NG");
             return errorMessageDto;
         }
-        ErrorMessageDto errorMessageDto = new ErrorMessageDto("Ok", "null");
+        ErrorMessageDto errorMessageDto = new ErrorMessageDto("OK", "null");
         System.out.println("signup OK");
         return errorMessageDto;
 
