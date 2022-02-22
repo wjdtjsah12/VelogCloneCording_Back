@@ -30,6 +30,7 @@ public class CommentController {
     // comment 삭제 메소드
     @DeleteMapping("/comment/delete/{commentId}")
     public void deleteComment(@PathVariable Long commentId){
+
         commentService.deleteComment(commentId);
     }
 
