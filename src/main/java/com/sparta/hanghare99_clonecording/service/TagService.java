@@ -39,8 +39,15 @@ public class TagService {
             board_tagRepository.save(board_tag);
         }
         return arr;
-
-//        return tagIds.getId();
     }
+
+    //태그 삭제
+    public void deleteTag(Long TagsId){
+        Tag tag = tagRepository.findById(TagsId).orElseThrow(
+                ()->new NullPointerException("잘못된 TagsId 입니다."));
+        tagRepository.delete(tag);
+    }
+
+    //해당 게시글 모든 태그 조회
 
 }

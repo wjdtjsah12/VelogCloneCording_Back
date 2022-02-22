@@ -24,6 +24,9 @@ public class TagController {
     }
 
     //태그 삭제
-//    @DeleteMapping("")/
+    @DeleteMapping("/tag/delete/{tagsId}")
+    public void deleteTag(@PathVariable Long tagsId){
+        tagService.deleteTag(tagsId);
+    }
 
 }
