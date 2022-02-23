@@ -39,7 +39,7 @@ public class UserService {
     }
     //아이디 중복 확인 함수
     public void checkUserId(String userId){
-        Optional<User> foundUserId = userRepository.findByUserId(userId);
+        Optional<User> foundUserId = userRepository.findByUseride(userId);
         if (foundUserId.isPresent()){
             throw new IllegalArgumentException("중복된 아이디 입니다.");
         }

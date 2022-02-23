@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -15,11 +13,11 @@ import java.util.List;
 public class Board extends Timestamped {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column
+    @Column(name = "board_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)
@@ -57,8 +55,8 @@ public class Board extends Timestamped {
         this.thumbnailImageUrl = requestDto.getThumbnailImageUrl();
     }
 
-    public void updateLikesCount(Long likesCount){
-        this.likesCount = likesCount;
+    public void updateLikesCount(Long likes){
+        this.likesCount = likes;
     }
 
 }

@@ -1,6 +1,5 @@
 package com.sparta.hanghare99_clonecording.dto;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

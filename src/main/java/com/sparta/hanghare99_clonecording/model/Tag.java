@@ -2,7 +2,6 @@ package com.sparta.hanghare99_clonecording.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.sparta.hanghare99_clonecording.dto.TagDto;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +15,7 @@ public class Tag {
     //TagsId
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "tags_id", nullable = false)
+    @Column(name = "tags_id")
     private Long id;
 
     //태그이름
@@ -24,6 +23,6 @@ public class Tag {
     private String tagName;
 
     public Tag(TagDto tagdto) {
-    this.tagName = tagName;
+    this.tagName = tagdto.getTagName();
     }
 }

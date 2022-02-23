@@ -15,13 +15,17 @@ public class BoardDetailResponseDto {
     private String nickname;
     private String thumbnailImageUrl;
     private String createdAt;
+    private Long likeCount;
+    private Long commentCount;
 
-    public BoardDetailResponseDto(Board board){
-        this.userId = board.getUser().getUserId();
+    public BoardDetailResponseDto(Board board, Long commentCount){
+        this.userId = board.getUser().getUseride();
         this.title = board.getTitle();
         this.content = board.getContent();
         this.nickname = board.getUser().getNickname();
         this.thumbnailImageUrl = board.getThumbnailImageUrl();
         this.createdAt = board.getCreatedAt();
+        this.likeCount = board.getLikesCount();
+        this.commentCount = commentCount;
     }
 }
