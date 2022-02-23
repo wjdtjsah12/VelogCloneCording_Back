@@ -24,7 +24,7 @@ public class BoardService {
     private final LikesRepository likesRepository;
     private final CommentRepository commentRepository;
 
-    public List<BoardResponseDto> getLikeBoards() {
+    public List<BoardResponseDto> likeBoards() {
         List<Board> boardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         List <BoardResponseDto> boardResponseDtoList = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class BoardService {
     }
 
     //게시글 작성
-    public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto, UserDetailsImpl userDetails) {
+    public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto) {
         Board board = new Board(requestDto, userDetails.getUser());
         //유효성검사
         String title = board.getTitle();

@@ -1,10 +1,6 @@
 package com.sparta.hanghare99_clonecording.controller;
 
-import com.sparta.hanghare99_clonecording.dto.BoardRegisterDto;
-import com.sparta.hanghare99_clonecording.dto.BoardRegisterResponseDto;
-import com.sparta.hanghare99_clonecording.dto.BoardUpdateReponseDto;
-import com.sparta.hanghare99_clonecording.dto.LikesResponseDto;
-import com.sparta.hanghare99_clonecording.model.Board;
+import com.sparta.hanghare99_clonecording.dto.*;
 import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
 import com.sparta.hanghare99_clonecording.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +16,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/boards/likes")
-    public List<Board> LikeBoards() {
+    public List<BoardResponseDto> LikeBoards() {
         return boardService.likeBoards();
     }
 
@@ -30,7 +26,7 @@ public class BoardController {
     }
 
     @GetMapping("/board/detail/{postingId}")
-    public Board readBoard(@PathVariable Long postingId) {
+    public BoardDetailResponseDto readBoard(@PathVariable Long postingId) {
         return boardService.readBoard(postingId);
     }
 

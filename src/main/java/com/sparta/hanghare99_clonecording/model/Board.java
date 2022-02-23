@@ -56,6 +56,7 @@ public class Board extends Timestamped {
     }
 
     public void updateLikesCount(Long likes){
+
         this.likesCount = likes;
     }
 
