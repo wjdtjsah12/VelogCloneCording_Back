@@ -2,11 +2,13 @@ package com.sparta.hanghare99_clonecording.model;
 
 import com.sparta.hanghare99_clonecording.dto.TagDto;
 import com.sparta.hanghare99_clonecording.repository.Board_TagRepository;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
+@NoArgsConstructor @Getter @Setter
 @Entity
 public class Board_Tag {
 

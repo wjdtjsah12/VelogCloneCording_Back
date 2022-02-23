@@ -20,10 +20,10 @@ public class Tag {
     private Long id;
 
     //태그이름
-    @Column
+    @Column(nullable = true)
     private String tagName;
 
     public Tag(TagDto tagdto) {
-    this.tagName = tagName;
+        this.tagName = tagdto.getTagName();
     }
 }
