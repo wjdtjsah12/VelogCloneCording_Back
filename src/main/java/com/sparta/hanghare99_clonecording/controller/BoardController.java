@@ -30,7 +30,6 @@ public class BoardController {
         return boardService.readBoard(postingId);
     }
 
-
     @PutMapping("/board/update/{postingId}")
     public BoardUpdateReponseDto updateBoard(@PathVariable Long postingId, @RequestBody  BoardRegisterDto boardRegisterDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return boardService.updateBoard(postingId, boardRegisterDto, userDetails);

@@ -25,7 +25,7 @@ public class BoardService {
     private final CommentRepository commentRepository;
 
     public List<BoardResponseDto> likeBoards() {
-        List<Board> boardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        List<Board> boardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "likesCount"));
         List <BoardResponseDto> boardResponseDtoList = new ArrayList<>();
 
         for(Board board : boardList){

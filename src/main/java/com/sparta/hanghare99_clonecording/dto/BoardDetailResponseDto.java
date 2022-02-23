@@ -17,6 +17,8 @@ public class BoardDetailResponseDto {
     private String createdAt;
     private Long likeCount;
     private Long commentCount;
+    private String contentSummary;
+    private String introduce;
 
     public BoardDetailResponseDto(Board board, Long commentCount){
         this.userId = board.getUser().getUseride();
@@ -27,5 +29,7 @@ public class BoardDetailResponseDto {
         this.createdAt = board.getCreatedAt();
         this.likeCount = board.getLikesCount();
         this.commentCount = commentCount;
+        this.contentSummary = board.getContentSummary();
+        this.introduce = board.getUser().getIntroduce();
     }
 }

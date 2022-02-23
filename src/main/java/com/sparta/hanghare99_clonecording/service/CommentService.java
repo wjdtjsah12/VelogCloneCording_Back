@@ -9,6 +9,7 @@ import com.sparta.hanghare99_clonecording.model.User;
 import com.sparta.hanghare99_clonecording.repository.BoardRepository;
 import com.sparta.hanghare99_clonecording.repository.CommentRepository;
 import com.sparta.hanghare99_clonecording.repository.UserRepository;
+import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
 import com.sparta.hanghare99_clonecording.validation.CommentValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,12 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
 
-    public CommentRegisterResponseDto registerComment(Long boardId, CommentRegisterDto requestDto) {
+    public CommentRegisterResponseDto registerComment(Long boardId, CommentRegisterDto requestDto, UserDetailsImpl userDetails) {
         // boardId, Dto 유효성검사
         Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("registerComment 내부 findByBoardId 오류"));
         CommentValidation.validationCommentRegister(requestDto);
 
-
-        // 테스트용 userId 1L로 설정
-        User user = userRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException("registerComment 내부 findByUserId 오류"));
+        User user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(() -> new IllegalArgumentException("registerComment 내부 findByUserId 오류"));
         Comment comment = new Comment(requestDto.getContent(), board, user);
         commentRepository.save(comment);
 
