@@ -23,6 +23,6 @@ public class Tag {
     private String tagName;
 
     public Tag(TagDto tagdto) {
-    this.tagName = tagdto.getTagName();
+        this.tagName = tagdto.getTagName();
     }
 }
