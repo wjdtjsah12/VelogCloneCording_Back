@@ -21,8 +21,8 @@ public class BoardController {
     }
 
     @PostMapping("/board/posting")
-    public BoardRegisterResponseDto postingBoard(@RequestBody BoardRegisterDto requestDto) {
-        return boardService.postingBoard(requestDto);
+    public BoardRegisterResponseDto postingBoard(@RequestBody BoardRegisterDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return boardService.postingBoard(requestDto, userDetails);
     }
 
     @GetMapping("/board/detail/{postingId}")
@@ -39,10 +39,5 @@ public class BoardController {
     @DeleteMapping("/board/delete/{postingId}")
     public void deleteBoard(@PathVariable Long postingId) {
         boardService.deleteBoard(postingId);
-    }
-
-    @PostMapping("/board/like/{boardId}")
-    public LikesResponseDto registerOrDeleteLike (@PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return boardService.registerOrDeleteLike(boardId, userDetails);
     }
 }

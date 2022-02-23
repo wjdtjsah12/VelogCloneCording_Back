@@ -38,7 +38,7 @@ public class BoardService {
     }
 
     //게시글 작성
-    public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto) {
+    public BoardRegisterResponseDto postingBoard(BoardRegisterDto requestDto, UserDetailsImpl userDetails) {
         Board board = new Board(requestDto, userDetails.getUser());
         //유효성검사
         String title = board.getTitle();
