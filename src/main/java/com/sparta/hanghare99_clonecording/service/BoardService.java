@@ -84,10 +84,4 @@ public class BoardService {
     public void deleteBoard(Long board_id) {
         boardRepository.deleteById(board_id);
     }
-
-
-
-//    public BoardLikesDto getBoardsLikes(Long boardId) {
-//
-//    }
 }
