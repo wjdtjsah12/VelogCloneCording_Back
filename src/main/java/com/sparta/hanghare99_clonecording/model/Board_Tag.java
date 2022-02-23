@@ -1,7 +1,5 @@
 package com.sparta.hanghare99_clonecording.model;
 
-import com.sparta.hanghare99_clonecording.dto.TagDto;
-import com.sparta.hanghare99_clonecording.repository.Board_TagRepository;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,15 +10,15 @@ public class Board_Tag {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "board_tag_Id", nullable = false)
+    @Column(name = "board_tag_id")
     private Long Id;
 
     @ManyToOne
-    @JoinColumn(name = "board_id", nullable = false)
+    @JoinColumn(name = "board_id")
     private Board board;
 
     @ManyToOne
-    @JoinColumn(name = "tag_id", nullable = false)
+    @JoinColumn(name = "tag_id")
     private Tag tag;
 
     public Board_Tag(Board board, Tag tag){

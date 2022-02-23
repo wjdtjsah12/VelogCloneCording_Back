@@ -2,15 +2,14 @@ package com.sparta.hanghare99_clonecording.service;
 
 import com.sparta.hanghare99_clonecording.dto.*;
 import com.sparta.hanghare99_clonecording.model.Board;
+import com.sparta.hanghare99_clonecording.model.Comment;
 import com.sparta.hanghare99_clonecording.model.User;
 import com.sparta.hanghare99_clonecording.repository.BoardRepository;
 import com.sparta.hanghare99_clonecording.repository.CommentRepository;
 import com.sparta.hanghare99_clonecording.repository.LikesRepository;
-import com.sparta.hanghare99_clonecording.repository.UserRepository;
 import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -56,7 +55,8 @@ public class BoardService {
         Board board =  boardRepository.findById(boardId).orElseThrow(
                 () -> new NullPointerException("존재하지 않는 글입니다.")
         );
-        return new BoardDetailResponseDto(board);
+        List <Comment> commentList = commentRepository.findAllByBoard(board);
+        return new BoardDetailResponseDto(board, (long)commentList.size());
     }
 
     //게시글 수정
@@ -67,7 +67,7 @@ public class BoardService {
         );
 
         User user = userDetails.getUser();
-        String userId = board.getUser().getUserId();
+        String userId = board.getUser().getUseride();
         String title = requestDto.getTitle();
         String content = requestDto.getContent();
 
@@ -81,8 +81,13 @@ public class BoardService {
     }
 
     //게시글 삭제
-    public void deleteBoard(Long board_id) {
-        boardRepository.deleteById(board_id);
+    public void deleteBoard(Long boardId) {
+        Board board =  boardRepository.findById(boardId).orElseThrow(
+                () -> new NullPointerException("존재하지 않는 글입니다.")
+        );
+        List <Comment> commentList = commentRepository.findAllByBoard(board);
+        commentRepository.deleteAll(commentList);
+        boardRepository.deleteById(boardId);
     }
 
 

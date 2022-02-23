@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class Comment extends Timestamped {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Column(name = "comment_id")
     private Long id;
 
     @ManyToOne

@@ -56,7 +56,7 @@ public class UserController {
             return new IsLoginDto(
                     username.getId(),
                     username.getUsername(),
-                    username.getUserId(),
+                    username.getUseride(),
                     username.getNickname(),
                     username.getIntroduce(),
                     username.getProfileNum()
