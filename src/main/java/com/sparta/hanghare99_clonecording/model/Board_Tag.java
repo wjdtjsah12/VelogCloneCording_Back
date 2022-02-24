@@ -16,15 +16,15 @@ public class Board_Tag {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "board_tag_Id", nullable = false)
+    @Column(name = "board_tag_id")
     private Long Id;
 
     @ManyToOne
-    @JoinColumn(name = "board_id", nullable = false)
+    @JoinColumn(name = "board_id")
     private Board board;
 
     @ManyToOne
-    @JoinColumn(name = "tag_id", nullable = false)
+    @JoinColumn(name = "tag_id")
     private Tag tag;
 
     public Board_Tag(Board board, Tag tag){

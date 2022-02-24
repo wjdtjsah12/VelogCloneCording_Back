@@ -162,6 +162,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         skipPathList.add("GET,/test");
 
+        // Board API 허용
+        skipPathList.add("GET,/boards/likes");
+        skipPathList.add("GET,/board/detail/{postingId}");
+
         skipPathList.add("GET,/");
         skipPathList.add("GET,/basic.js");
 

@@ -8,10 +8,10 @@ import com.sparta.hanghare99_clonecording.model.User;
 import com.sparta.hanghare99_clonecording.repository.BoardRepository;
 import com.sparta.hanghare99_clonecording.repository.LikesRepository;
 import com.sparta.hanghare99_clonecording.repository.UserRepository;
+import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -41,7 +41,6 @@ public class LikesService {
 
         Likes likes = new Likes(board.get(), user.get());
         likesRepository.save(likes);
-//        System.out.println(board.get().getLikesList().size());
         return new LikesRegisterResponseDto(likes.getId());
     }
 
@@ -49,4 +48,30 @@ public class LikesService {
         Likes likes = likesRepository.findById(likesId).orElseThrow(() -> new IllegalArgumentException("deleteLike 내부 findByLikesId 오류"));
         likesRepository.delete(likes);
     }
+
+    // 좋아요 등록 및 삭제
+    public LikesResponseDto registerOrDeleteLike(Long boardId, UserDetailsImpl userDetails) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글입니다."));
+        User user = userDetails.getUser();
+        Optional<Likes> likes = likesRepository.findByBoardAndUser(board, user);
+        if (likes.isPresent()) {
+            likesRepository.delete(likes.get());
+            board.updateLikesCount(board.getLikesCount()-1L);
+            boardRepository.save(board);
+            return new LikesResponseDto(false, board.getLikesCount());
+        }
+        Likes newLikes = new Likes(board, user);
+        likesRepository.save(newLikes);
+        board.updateLikesCount(board.getLikesCount()+1L);
+        boardRepository.save(board);
+        return new LikesResponseDto(true, board.getLikesCount());
+    }
+
+//    public BoardLikesDto getBoardsLikes(Long boardId) {
+//        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글입니다."));
+//        Long likesNum = board.getLikesCount();
+//        BoardLikesDto boardLikesDto = new BoardLikesDto();
+//        boardLikesDto.setLikesNum(likesNum);
+//        return boardLikesDto;
+//    }
 }

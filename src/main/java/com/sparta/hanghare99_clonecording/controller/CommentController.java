@@ -4,8 +4,10 @@ import com.sparta.hanghare99_clonecording.dto.CommentRegisterDto;
 import com.sparta.hanghare99_clonecording.dto.CommentRegisterResponseDto;
 import com.sparta.hanghare99_clonecording.dto.CommentResponseDto;
 import com.sparta.hanghare99_clonecording.model.Comment;
+import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
 import com.sparta.hanghare99_clonecording.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,8 @@ public class CommentController {
 
     // comment 등록 메소드
     @PostMapping("/comment/write/{boardId}")
-    public CommentRegisterResponseDto registerComment(@PathVariable Long boardId, @RequestBody CommentRegisterDto requestDto){
-        return commentService.registerComment(boardId, requestDto);
+    public CommentRegisterResponseDto registerComment(@PathVariable Long boardId, @RequestBody CommentRegisterDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return commentService.registerComment(boardId, requestDto, userDetails);
     }
 
     // comment 수정 메소드

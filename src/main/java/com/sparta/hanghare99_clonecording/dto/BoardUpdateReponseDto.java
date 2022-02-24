@@ -8,12 +8,12 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class BoardUpdateReponseDto {
-    private String username;
+    private String userId;
     private String title;
     private String content;
 
-    public BoardUpdateReponseDto (String username, String title, String content){
-        this.username = username;
+    public BoardUpdateReponseDto (String userId, String title, String content){
+        this.userId = userId;
         this.title = title;
         this.content = content;
     }

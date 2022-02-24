@@ -13,6 +13,7 @@ import java.util.Random;
 public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Column(name = "user_id")
     private Long id;
 
     //이메일 -> 중복 안됨 -> 유저 네임으로 바꿔야함
@@ -21,7 +22,7 @@ public class User {
 
     //아이디 -> 중복 안됨
     @Column(nullable = false, unique = true)
-    private String userId;
+    private String useride;
 
     //성명 -> 닉네임 change
     @Column(nullable = false)
@@ -32,17 +33,17 @@ public class User {
     private String password;
 
     //소개
-    @Column(nullable = true)
+    @Column
     private String introduce;
 
     //프로필넘버
-    @Column(nullable = true)
+    @Column
     private int profileNum;
     // 랜덤 난수 생성 구현해야합니다.
 
     public User(SignupDto requestDto){
         this.username = requestDto.getUsername();
-        this.userId = requestDto.getUserId();
+        this.useride = requestDto.getUserId();
         this.nickname = requestDto.getNickname();
         this.password = requestDto.getPassword();
         this.introduce = requestDto.getIntroduce();

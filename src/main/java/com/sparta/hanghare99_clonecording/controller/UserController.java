@@ -54,8 +54,9 @@ public class UserController {
         System.out.println(userDetails);
             User username = userDetails.getUser();
             return new IsLoginDto(
+                    username.getId(),
                     username.getUsername(),
-                    username.getUserId(),
+                    username.getUseride(),
                     username.getNickname(),
                     username.getIntroduce(),
                     username.getProfileNum()
