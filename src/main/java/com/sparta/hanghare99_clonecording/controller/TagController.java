@@ -20,8 +20,8 @@ public class TagController {
 
     //태그 등록
     @PostMapping("/tag/register/{boardId}")
-    public List<TagResponseDto> registerTag(@PathVariable Long boardId, @RequestBody List<TagDto> tagDto){
-        return tagService.registerTag(boardId,tagDto);
+    public void registerTag(@PathVariable Long boardId, @RequestBody List<TagDto> tagDto) throws Exception {
+        tagService.registerTag(boardId,tagDto);
     }
 
 //    //태그 삭제
