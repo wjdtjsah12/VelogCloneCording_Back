@@ -38,6 +38,10 @@ public class Board extends Timestamped {
     @Column
     private Long registerdUid;
 
+    @OneToMany
+    @Column(name = "tag_id")
+    private List<Tag> tagList = new ArrayList<>();
+
     public Board(BoardRegisterDto requestDto, User user){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
@@ -46,6 +50,17 @@ public class Board extends Timestamped {
         this.registerdUid = user.getId();
         this.user = user;
         this.likesCount = 0L;
+    }
+
+    public Board(String title, User user,Long boardId1, List<Tag> tag1) {
+        this.title = title;
+        this.user = user;
+        this.id = boardId1;
+        this.tagList = tag1;
+    }
+
+    public void setTag(List<Tag> tag1) {
+        this.tagList = tag1;
     }
 
     public void update(BoardRegisterDto requestDto) {

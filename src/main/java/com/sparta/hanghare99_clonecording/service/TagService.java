@@ -10,10 +10,10 @@ import com.sparta.hanghare99_clonecording.repository.BoardRepository;
 import com.sparta.hanghare99_clonecording.repository.Board_TagRepository;
 import com.sparta.hanghare99_clonecording.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -23,29 +23,44 @@ public class TagService {
     private final TagRepository tagRepository;
     private final Board_TagRepository board_tagRepository;
 
+    //태그 등록
+    public void registerTag(Long boardId, List<TagDto> tagDto) throws Exception {
+//        List<TagResponseDto> arr = new ArrayList<>();
 
-    public List<TagResponseDto> registerTag(Long boardId, List<TagDto> tagDto) {
-        List<TagResponseDto> arr = new ArrayList<>();
-
-        List<Tag> tagList = new ArrayList<>();
-
-        Board board = boardRepository.findById(boardId).orElseThrow(
-                () -> new IllegalArgumentException("boardId 오류"));
-        for (int i = 0; i < tagDto.size(); i++) {
-            Tag tag = new Tag(tagDto.get(i));
-            Tag temp = tagRepository.save(tag);
-            Long Ids = temp.getId();
-            TagResponseDto tagResponseDto = new TagResponseDto(Ids);
-
-            arr.add(tagResponseDto);
-
-            Board_Tag board_tag = new Board_Tag(board, tag);
-            board_tagRepository.save(board_tag);
-
-            tagList.add(tag);
+        Optional<Board> board = boardRepository.findById(boardId);
+        if (!board.isPresent()) {
+            throw new Exception("존재하지 않는 게시글입니다.");
         }
-        return arr;
+
+        List<Tag> tag1 = new ArrayList<>();//그릇용
+
+        //중복 태그 검사
+        for (int i=0; i<tagDto.size(); i++){
+            for (int j=i+1; j<tagDto.size(); j++){
+                if (tagDto.get(j).getTagName().equals(tagDto.get(i).getTagName())){
+                    throw new Exception("중복된 태그입니다.");
+                }else {
+                    Tag tag = new Tag(tagDto.get(i));
+                    tagRepository.save(tag);
+                            tag1.add(tag);
+                }
+            }
+//
+//            for (int k = 0; k < tagDto.size(); k++) {
+//                Tag tag = new Tag(tagDto.get(k));
+//                tagRepository.save(tag);
+//                tag1.add(tag);
+//            }
+        }
+
+        Board board1 = board.get();
+        board1.setTag(tag1);
+        boardRepository.save(board1);
     }
+
+
+//        return arr;
+
 
 //    //태그 삭제
 //    @Transactional
