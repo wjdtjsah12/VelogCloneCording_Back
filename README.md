@@ -13,7 +13,9 @@ Front-end (React)
 Back-end (Spring)
 
 ● 정선모 🧑
+
 ● 이용만 🧑
+
 ● 박정희 🧑
 
 3.사용 기술 🔧 ⚙️
