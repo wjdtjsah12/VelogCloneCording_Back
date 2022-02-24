@@ -3,36 +3,59 @@
  ![image](https://user-images.githubusercontent.com/97423687/155509143-bfb26776-547a-4d6c-914f-9ec11f706d7c.png)
  
 2. 제작기간 & 팀원소개 🏃‍🏃‍♀️ 💨
+
 Front-end (React)
+
 ● 정현수 👨
+
 ● 이혜진 👧
+
 Back-end (Spring)
+
 ● 정선모 🧑
 ● 이용만 🧑
 ● 박정희 🧑
 
 3.사용 기술 🔧 ⚙️
+
 ● Language : Java 8
+
 ● Tool : Intellij
+
 ● Infrastructure : AWS RDS - MySQL, Aws EC2
+
 ● 기타 : Gradle, Spring Security, JDK 1.8
+
 ● Other Tools : Git, Github, notion
 
 4. 구현 기능 📃
+
 ● 로그인(JWT Token 인증) & 회원가입 🔓
+
 ● 게시글 CR(UD)
+
 ● 댓글 CR(UD)
+
 ● 태그
+
 ● 좋아요 순위 게시글 정렬
+
 ● 최신글 
+
 
 5. 테이블 설계
 - 테이블설계
+
     - User : **id**, email, userId, username, password, introduce, profileNum
+    
     - Board : **id**, [user_id], title, content, contentSummary, createdAt, likesList, registerdUid thumbnailImageUrl
+    
     - Comment : **id**, [board_id], [user_id], createdAt, content
+    
     - Likes : **id**, [board_id], [user_id]
+    
     - Tags : **id**, [board_id], tagName
+    
     - 연관관계 정리
         - User(1):Board(N)
         - Board(1):Comment(N)
@@ -43,6 +66,7 @@ Back-end (Spring)
 ![Untitled](https://user-images.githubusercontent.com/97423687/155509197-77a73dfd-c314-47bc-a51e-19993cabe7fc.png)
 
 6. 와이어프레임
+
  ![프레임워크](https://user-images.githubusercontent.com/97423687/155509313-51dceff4-56d4-483e-9bfd-715b30306e1c.png)
 
  
