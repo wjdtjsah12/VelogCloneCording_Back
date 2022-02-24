@@ -1,0 +1,39 @@
+1. 시연영상
+2. 제작기간 & 팀원소개 🏃‍🏃‍♀️ 💨
+Front-end (React)
+● 정현수 👨
+● 이혜진 👧
+Back-end (Spring)
+● 정선모 🧑
+● 이용만 🧑
+● 박정희 🧑
+
+3.사용 기술 🔧 ⚙️
+● Language : Java 8
+● Tool : Intellij
+● Infrastructure : AWS RDS - MySQL, Aws EC2
+● 기타 : Gradle, Spring Security, JDK 1.8
+● Other Tools : Git, Github, notion
+
+4. 구현 기능 📃
+● 로그인(JWT Token 인증) & 회원가입 🔓
+● 게시글 CR(UD)
+● 댓글 CR(UD)
+●
+
+5. 테이블 설계
+- 테이블설계
+    - User : **id**, email, userId, username, password, introduce, profileNum
+    - Board : **id**, [user_id], title, content, contentSummary, createdAt, likesList, registerdUid thumbnailImageUrl
+    - Comment : **id**, [board_id], [user_id], createdAt, content
+    - Likes : **id**, [board_id], [user_id]
+    - Tags : **id**, [board_id], tagName
+    - 연관관계 정리
+        - User(1):Board(N)
+        - Board(1):Comment(N)
+        - User(1):Comment(N)
+        - Likes(1):User(1)
+        - Likes(1):Board(1)
+        - Tags(N):Board(1)
+        
+ 
