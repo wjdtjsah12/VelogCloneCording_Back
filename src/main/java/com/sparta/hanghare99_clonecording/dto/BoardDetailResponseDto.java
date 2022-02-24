@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class BoardDetailResponseDto {
+    private Long boardId;
     private String userId;
     private String title;
     private String content;
@@ -19,8 +20,10 @@ public class BoardDetailResponseDto {
     private Long commentCount;
     private String contentSummary;
     private String introduce;
+    private int profileNum;
 
     public BoardDetailResponseDto(Board board, Long commentCount){
+        this.boardId = board.getId();
         this.userId = board.getUser().getUseride();
         this.title = board.getTitle();
         this.content = board.getContent();
@@ -31,5 +34,6 @@ public class BoardDetailResponseDto {
         this.commentCount = commentCount;
         this.contentSummary = board.getContentSummary();
         this.introduce = board.getUser().getIntroduce();
+        this.profileNum = board.getUser().getProfileNum();
     }
 }

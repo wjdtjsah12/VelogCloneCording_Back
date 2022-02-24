@@ -1,5 +1,6 @@
 package com.sparta.hanghare99_clonecording.service;
 
+import com.sparta.hanghare99_clonecording.dto.BoardGetLikesResponseDto;
 import com.sparta.hanghare99_clonecording.dto.LikesRegisterResponseDto;
 import com.sparta.hanghare99_clonecording.dto.LikesResponseDto;
 import com.sparta.hanghare99_clonecording.model.Board;
@@ -22,24 +23,20 @@ public class LikesService {
     private final UserRepository userRepository;
     private final LikesRepository likesRepository;
 
-    public LikesRegisterResponseDto registerLikes(Long boardId) {
+    public LikesRegisterResponseDto registerLikes(Long boardId, UserDetailsImpl userDetails) {
         Optional <Board> board = boardRepository.findById(boardId);
         if(!board.isPresent()){
             throw new IllegalArgumentException("해당 게시글이 없습니다.");
         }
 
-        // yserId 1L로 설정(테스트용)
-        Optional <User> user = userRepository.findById(1L);
-        if(!user.isPresent()){
-            throw new IllegalArgumentException("해당 유저가 없습니다.");
-        }
+        User user = userRepository.findById(userDetails.getUser().getId()).get();
 
-        Optional <Likes> likesCheck = likesRepository.findByBoardAndUser(board.get(), user.get());
+        Optional <Likes> likesCheck = likesRepository.findByBoardAndUser(board.get(), user);
         if(likesCheck.isPresent()){
             throw new IllegalArgumentException("이미 좋아요 상태입니다.");
         }
 
-        Likes likes = new Likes(board.get(), user.get());
+        Likes likes = new Likes(board.get(), user);
         likesRepository.save(likes);
         return new LikesRegisterResponseDto(likes.getId());
     }
@@ -51,7 +48,7 @@ public class LikesService {
 
     // 좋아요 등록 및 삭제
     public LikesResponseDto registerOrDeleteLike(Long boardId, UserDetailsImpl userDetails) {
-        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글입니다."));
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("registerOrDeleteLike 내부 findByBoardId 오류"));
         User user = userDetails.getUser();
         Optional<Likes> likes = likesRepository.findByBoardAndUser(board, user);
         if (likes.isPresent()) {
@@ -67,11 +64,13 @@ public class LikesService {
         return new LikesResponseDto(true, board.getLikesCount());
     }
 
-//    public BoardLikesDto getBoardsLikes(Long boardId) {
-//        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글입니다."));
-//        Long likesNum = board.getLikesCount();
-//        BoardLikesDto boardLikesDto = new BoardLikesDto();
-//        boardLikesDto.setLikesNum(likesNum);
-//        return boardLikesDto;
-//    }
+    public BoardGetLikesResponseDto getBoardsLikes(Long boardId, UserDetailsImpl userDetails) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("getBoardsLikes 내부 findByBoardId 오류"));
+        User user = userDetails.getUser();
+        Optional<Likes> likes = likesRepository.findByBoardAndUser(board, user);
+        if (likes.isPresent()) {
+            return new BoardGetLikesResponseDto(true);
+        }
+        return new BoardGetLikesResponseDto(false);
+    }
 }

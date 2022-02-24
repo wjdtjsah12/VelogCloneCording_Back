@@ -1,5 +1,6 @@
 package com.sparta.hanghare99_clonecording.controller;
 
+import com.sparta.hanghare99_clonecording.dto.BoardGetLikesResponseDto;
 import com.sparta.hanghare99_clonecording.dto.LikesRegisterResponseDto;
 import com.sparta.hanghare99_clonecording.dto.LikesResponseDto;
 import com.sparta.hanghare99_clonecording.security.provider.UserDetailsImpl;
@@ -16,8 +17,8 @@ public class LikesController {
 
 
     @PostMapping("/like/register/{boardId}")
-    public LikesRegisterResponseDto registerLikes(@PathVariable Long boardId){
-        return likesService.registerLikes(boardId);
+    public LikesRegisterResponseDto registerLikes(@PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return likesService.registerLikes(boardId, userDetails);
     }
 
     @DeleteMapping("/like/delete/{likesId}")
@@ -30,8 +31,8 @@ public class LikesController {
         return likesService.registerOrDeleteLike(boardId, userDetails);
     }
 
-//    @GetMapping("/board/likes/{boardId}")
-//    public BoardLikesDto getBoardsLikes(@PathVariable Long boardId){
-//        return likesService.getBoardsLikes(boardId);
-//    }
+    @GetMapping("/board/like/{boardId}")
+    public BoardGetLikesResponseDto getBoardsLikes(@PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return likesService.getBoardsLikes(boardId, userDetails);
+    }
 }

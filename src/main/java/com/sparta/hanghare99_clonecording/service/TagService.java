@@ -27,6 +27,8 @@ public class TagService {
     public List<TagResponseDto> registerTag(Long boardId, List<TagDto> tagDto) {
         List<TagResponseDto> arr = new ArrayList<>();
 
+        List<Tag> tagList = new ArrayList<>();
+
         Board board = boardRepository.findById(boardId).orElseThrow(
                 () -> new IllegalArgumentException("boardId 오류"));
         for (int i = 0; i < tagDto.size(); i++) {
@@ -39,6 +41,8 @@ public class TagService {
 
             Board_Tag board_tag = new Board_Tag(board, tag);
             board_tagRepository.save(board_tag);
+
+            tagList.add(tag);
         }
         return arr;
     }

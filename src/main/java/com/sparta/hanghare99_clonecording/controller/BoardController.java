@@ -16,8 +16,13 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/boards/likes")
-    public List<BoardResponseDto> LikeBoards() {
-        return boardService.likeBoards();
+    public List<BoardResponseDto> GetLikesBoards() {
+        return boardService.GetLikesBoards();
+    }
+
+    @GetMapping("/boards/recent")
+    public List<BoardResponseDto> GetRecentBoards() {
+        return boardService.GetRecentBoards();
     }
 
     @PostMapping("/board/posting")
